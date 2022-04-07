@@ -1,0 +1,137 @@
+//TreeToArray Function
+function treeToArray(tree, list) {
+    list = list || [];
+    for (var i = 0; i < tree.length; i++) {
+        if (tree[i].children) {
+            treeToArray(tree[i].children, list);
+        } else {
+            list.push(tree[i]);
+        }
+    }
+    return list;
+}
+
+//ArrayToTree Function
+function arrayToTree(list, tree) {
+    tree = tree || [];
+    var tmpMap = {};
+    for (var i = 0; i < list.length; i++) {
+        var tmp = list[i];
+        tmpMap[tmp.id] = tmp;
+        tmpMap[tmp.id].children = [];
+    }
+    for (var i = 0; i < list.length; i++) {
+        var tmp = list[i];
+        if (tmp.parentId) {
+            tmpMap[tmp.parentId].children.push(tmp);
+        } else {
+            tree.push(tmp);
+        }
+    }
+    return tree;
+}
+
+
+// echarts圆饼config
+var pieConfig = {
+    title: {
+        text: '',
+        subtext: '',
+        x: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: []
+    },
+    series: [
+        {
+            name: '',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: [],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+// nginx配置conf
+var nginxConf = {
+    "server": {
+        "listen": "80",
+        "server_name": "",  
+        "location": { 
+            "~ / ": {
+                "root": "",
+                "index": "index.html index.htm;", 
+                "try_files $uri $uri/ /index.html $uri/index.html;"
+            }
+        }
+    }
+};
+
+// nginx配置conf包含代理websocket
+
+
+  
+
+
+//threejs画个矩形
+
+
+// usewebsocket function
+function usewebsocket(url, callback) {
+    var ws = new WebSocket(url);
+    ws.onopen = function () {
+        console.log("websocket open");
+    };
+    ws.onmessage = function (evt) {
+        callback(evt.data);
+    };
+    ws.onclose = function () {
+        console.log("websocket close");
+    };
+    ws.onerror = function () {
+        console.log("websocket error");
+    };
+}
+
+
+// usefetch function
+function usefetch(url, callback) {
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
+            callback(json);
+        });
+}
+
+// http.js function
+function http(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            callback(xhr.responseText);
+        }
+    };
+    xhr.send();
+}
+
+
+
+// js 冒泡排序
+
