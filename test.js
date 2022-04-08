@@ -133,5 +133,40 @@ function http(url, callback) {
 
 
 
-// js 冒泡排序
 
+function unique(arr) {
+    var result = [], hash = {};
+    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+        if (!hash[elem]) {
+            result.push(elem);
+            hash[elem] = true;
+        }
+    }
+    return result;
+}
+
+
+
+// 用对象属性唯一的性质去重,且对象的键名只能是字符串或者symbol
+function unique(arr) {
+    var result = [], hash = {};
+    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+        var key = JSON.stringify(Object.keys(elem));
+        if (!hash[key]) {
+            result.push(elem);
+            hash[key] = true;
+        }
+    }
+    return result;
+}
+
+
+// svg画一个三角形 html
+<svg width="100" height="100">
+    <polygon points="10,10 40,40 70,10" style="fill:lime;stroke:purple;stroke-width:1" />
+</svg>
+
+// svg画一个五角星 html
+<svg width="100" height="100">
+    <polygon points="10,10 40,40 70,10" style="fill:lime;stroke:purple;stroke-width:1" />
+</svg>
