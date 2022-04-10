@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div id="app">
-    <div>{{name}}</div>
-    <div>{{age}}</div>
-    <div v-text="hello"></div>
-    <div class="msg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{name}}</div>
+      <div>{{age}}</div>
+      <div v-text="hello"></div>
+      <div class="msg">
         <span>{{msg}}</span>
+      </div>
+      <button @click="handleClick">点击</button>
     </div>
-    <button @click="handleClick">点击</button>
-</div>
-<script type="module" src="./index.js"> </script>
-</body>
+    <script type="module" src="./test.js"></script>
+  </body>
 </html>
