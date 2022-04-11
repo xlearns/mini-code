@@ -15,7 +15,7 @@ function defineRective(target, key, val) {
   observe(val);
   let dep = new Dep();
   Object.defineProperty(target, key, {
-    // 可枚举
+    // 可枚举  
     enumerable: true,
     // 不可配置
     configurable: false,
