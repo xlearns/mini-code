@@ -12,9 +12,11 @@
     "@vue/compiler-sfc": "^3.2.31",
     "chalk": "^4.1.2",
     "figlet": "^1.5.2",
-    "koa": "^2.13.4",
+    "koa": "^2.13.1",
     "koa-static": "^5.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "magic-string": "^0.25.7",
+    "es-module-lexer": "^0.7.1"
   },
   "dependencies": {
     "vue": "^3.2.31"
