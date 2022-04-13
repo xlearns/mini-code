@@ -8,7 +8,7 @@ const exportDefaultReg = /export default/
 
 module.exports = function({app,root}){
   app.use(async (ctx,next)=>{
-    if (!ctx.path.endsWith('.vue')) return await next()
+    if (!ctx.path.endsWith('.vue')) return next()
     // vue文件  
     const filePath = path.join(root, ctx.path)
     // 拿到vue文件的内容
@@ -30,6 +30,7 @@ module.exports = function({app,root}){
         ctx.type = 'js'
         ctx.body = code
       }
+
     }else{
       // 解析template
       if (ctx.query.type === 'template') {
@@ -39,6 +40,5 @@ module.exports = function({app,root}){
         ctx.body = code
       }
     }
-    
   })
 }

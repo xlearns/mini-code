@@ -5,3 +5,7 @@
 
 # vite的实现原理
 - vite在浏览器端使用export import的方式导入和导出模块，同时实现了按需加载，vite高度依赖module script特性
+
+# 洋葱模型
+
+# hmr

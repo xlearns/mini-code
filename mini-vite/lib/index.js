@@ -4,6 +4,7 @@ const chalk = require('chalk');
 let asyncFiglet = promisify(require('figlet'))
 const open = require('open');
 
+
 // 静态托管
 const serverPluginService = require('./plugin/serverPluginService');
 // 加载js资源,遇到import外部导入的包的话,替换成/@modules/xxx
@@ -33,10 +34,13 @@ function createServer(){
     // 根目录
     root
   }
- 
+  
+  
   // 插件
   const plugins = [processPlugin,moduleReWritePlugin,resolveModulePlugin,vuePlugin,ImagePlugin,serverPluginService]
   plugins.forEach(plugin=>plugin(content))
+  
+
 
   return app;
 }

@@ -1,0 +1,16 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "服务器返回图片.js",
+  "scripts": {
+    "dev": "nodemon 服务器返回图片.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.13.4",
+    "nodemon": "^2.0.15"
+  }
+}

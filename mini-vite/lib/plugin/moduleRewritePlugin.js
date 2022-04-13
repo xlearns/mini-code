@@ -3,7 +3,7 @@ const path = require('path')
 const { readBody } = require('./../utils.js')
 // 根据start and end替换字符串
 const MagicString = require('magic-string')
-// 解析esm
+// 解析esm import
 const { parse } = require('es-module-lexer')
 
 module.exports = function({app,root}){

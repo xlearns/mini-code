@@ -4,6 +4,7 @@
 	<p>
 		Edit <code>components/HelloWorld.vue</code> to test hot module replacement.
 	</p>
+	<img alt="Vue logo" src="./../assets/xue.jpg" />
 </template>
 
 <script>
