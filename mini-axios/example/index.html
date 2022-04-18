@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="importmap">
+    {
+      "imports":{
+        "axios":"./../axios.js"
+      }
+    }
+  </script>
+
+</head>
+<body>
+  <button class="btn">点击发送请求</button>
+  <script type="module">
+   import axios from 'axios'
+
+    let Axios = axios()
+    Axios.interceptors.request.use(()=>{
+      console.log('请求拦截器1');
+    },error=>{
+      console.log('请求拦截器2');
+    })
+
+    Axios.interceptors.response.use((response)=>{
+        console.log('响应拦截器1');
+        return response;
+      }, (error)=>{
+        console.log('响应拦截器2')
+        return Promise.reject(error);
+      });
+   document.querySelector('.btn').onclick = function(){
+     console.log(Axios.get)
+      // Axios.get('http://localhost:3000/api/get').then(res=>{
+      //   console.log(res);
+      // },(er)=>{
+      //   console.log(er)
+      // })
+    }
+  </script>
+</body>
+</html>
