@@ -12,35 +12,9 @@
       }
     }
   </script>
-
+  <script type="module" src="index.js"></script>
 </head>
 <body>
   <button class="btn">点击发送请求</button>
-  <script type="module">
-   import axios from 'axios'
-
-    let Axios = axios()
-    Axios.interceptors.request.use(()=>{
-      console.log('请求拦截器1');
-    },error=>{
-      console.log('请求拦截器2');
-    })
-
-    Axios.interceptors.response.use((response)=>{
-        console.log('响应拦截器1');
-        return response;
-      }, (error)=>{
-        console.log('响应拦截器2')
-        return Promise.reject(error);
-      });
-   document.querySelector('.btn').onclick = function(){
-     console.log(Axios.get)
-      // Axios.get('http://localhost:3000/api/get').then(res=>{
-      //   console.log(res);
-      // },(er)=>{
-      //   console.log(er)
-      // })
-    }
-  </script>
 </body>
 </html>

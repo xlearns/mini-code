@@ -2,9 +2,9 @@ export default class InterceptorManager{
   constructor(){
     this.handlers = []
   }
-  use(resolved,rejected){
+  use(fulfilled,rejected){
     this.handlers.push({
-      resolved,
+      fulfilled,
       rejected
     })
   }
