@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"typeRoots": ["./node_modules/@types/", "./types"]
+	},
+	"include": ["src/*.ts", "types/*.d.ts"],
+	"exclude": ["node_modules", "**/*.js"]
+}
