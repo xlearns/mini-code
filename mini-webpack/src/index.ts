@@ -1,100 +1,60 @@
-const fs = require("fs");
-const path = require("path");
-const babylon = require("babylon");
-const traverse = require("babel-traverse").default;
-const { transformFromAst } = require("babel-core");
-let ID = 0;
-
-function readFile(filename) {
-	const content = fs.readFileSync(filename, "utf-8");
-	return content;
+import fs from "fs";
+import path from "path";
+import parser from "@babel/parser";
+import traverse from "@babel/traverse";
+import ejs from "ejs";
+import babel from "babel-core";
+var id = 0;
+function createAsset(filePath) {
+  //1、获取文件内容
+  const source = fs.readFileSync(filePath, {
+    encoding: "utf-8",
+  });
+  const ast = parser.parse(source, {
+    sourceType: "module",
+  });
+  const deps = [];
+  traverse.default(ast, {
+    ImportDeclaration({ node }) {
+      deps.push(node.source.value);
+    },
+  });
+  const { code } = babel.transformFromAst(ast, null, {
+    presets: ["env"],
+  });
+  //2、获取依赖关系
+  return {
+    filePath,
+    code,
+    deps,
+    mapping: {},
+    id: id++,
+  };
 }
-
-function parser(content) {
-	const ast = babylon.parse(content, {
-		sourceType: "module",
-	});
-	return ast;
+function createGraph() {
+  const mainAsset = createAsset("./example/index.js");
+  const queue = [mainAsset];
+  for (const asset of queue) {
+    asset.deps.forEach((relativePath) => {
+      const child = createAsset(path.resolve("./example", relativePath));
+      asset.mapping[relativePath] = child.id;
+      queue.push(child);
+    });
+  }
+  return queue;
 }
-
-function createAsset(filename) {
-	const content = readFile(filename);
-	const ast = parser(content);
-	const dependencies = [];
-
-	traverse(ast, {
-		ImportDeclaration({ node }) {
-			const source = node.source.value;
-			dependencies.push(source);
-		},
-	});
-
-	//  通过递增简单计数器为此模块分配唯一标识符.
-	const id = ID++;
-	const { code } = transformFromAst(ast, null, {
-		presets: ["env"],
-	});
-
-	return {
-		id,
-		filename,
-		dependencies,
-		code,
-	};
+const graph = createGraph();
+function build(graph) {
+  const template = fs.readFileSync("./bundle.ejs", { encoding: "utf-8" });
+  const data = graph.map((asset) => {
+    const { id, code, mapping } = asset;
+    return {
+      id,
+      code,
+      mapping,
+    };
+  });
+  let code = ejs.render(template, { data });
+  fs.writeFileSync("./dist/bundle.js", code);
 }
-
-function createGraph(filename) {
-	const mainAsset = createAsset(filename);
-	const queue: typeAsset[] = [mainAsset];
-
-	for (const asset of queue) {
-		asset.mapping = {};
-		// 这个模块所在的目录
-		const dirname = path.dirname(asset.filename);
-		//模块依赖
-		asset.dependencies.forEach((relativePath) => {
-			const absolutePath = path.join(dirname, relativePath);
-			// __dirname根目录 绝对地址
-			// dirname 当前目录 相对地址
-			const child = createAsset(absolutePath);
-			asset.mapping[relativePath] = child.id;
-			queue.push(child);
-		});
-	}
-
-	return queue;
-}
-
-function bundle(pragh) {
-	let modules = "";
-	pragh.forEach((mod) => {
-		modules += `${mod.id}: [
-      function (require, module, exports) { ${mod.code} },
-      ${JSON.stringify(mod.mapping)},
-    ],`;
-	});
-
-	const result = `
-    (function(modules) {
-      function require(id) { //🌟
-        const [fn, mapping] = modules[id];
-        function localRequire(name) { //⏰
-          return require(mapping[name]); //🌟
-        }
-        const module = { exports : {} };
-        fn(localRequire, module, module.exports); 
-        return module.exports;
-      }
-      require(0);
-    })({${modules}})
-  `;
-
-	return result;
-}
-
-const url = "./example/index.js";
-let graph = createGraph(url);
-
-const result = bundle(graph);
-
-console.log(result);
+build(graph);
