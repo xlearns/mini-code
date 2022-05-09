@@ -1,8 +1,11 @@
 export  default class ZRender {
-  constructor(){
-    console.log('zrender');
+  constructor(dom){
+    
   }
   add(el){
-    console.log('add');
+  
+  }
+  render(){
+
   }
 }
