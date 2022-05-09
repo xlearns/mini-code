@@ -9,4 +9,38 @@ let circle = new zrender.Circle({
     r: 20,
   },
 });
-zr.add(circle);
+let circle1 = new zrender.Circle({
+  shape: {
+    cx: 60,
+    cy: 60,
+    r: 20,
+  },
+  style: {
+    fill: "#00f",
+  },
+});
+let circle2 = new zrender.Circle({
+  shape: {
+    cx: 100,
+    cy: 100,
+    r: 40,
+  },
+  style: {
+    fill: "#0ff",
+    stroke: "#f00",
+  },
+});
+
+let rect = new zrender.Rect({
+  shape: {
+    x: 110,
+    y: 110,
+    width: 40,
+    height: 40,
+  },
+  style: {
+    fill: "#0ff",
+    stroke: "transparent",
+  },
+});
+zr.add(rect, circle, circle1, circle2);

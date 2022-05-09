@@ -3,6 +3,7 @@ class Element {
     this.options = opt;
     this.shape = {};
     this.style = {};
+    this.updateOptions();
   }
   updateOptions() {
     // 合并
