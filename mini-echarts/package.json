@@ -1,0 +1,13 @@
+{
+  "name": "mini-echarts",
+  "version": "1.0.0",
+  "description": "",
+  "type":"module",
+  "main": "mini-zrender.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
