@@ -1,3 +1,11 @@
+function bindStyle (ctx, style) {
+  let fill = style.fill || 'transparent'
+  ctx.fillStyle = fill
+  ctx.strokeStyle = style.stroke
+  ctx.globalAlpha = style.opacity
+  ctx.lineWidth = style.lineWidth
+}
+
 class Element {
   constructor(opt) {
     this.options = opt;
@@ -10,6 +18,10 @@ class Element {
     let opt = this.options;
     opt.style && Object.assign(this.style, opt.style);
     opt.shape && Object.assign(this.shape, opt.shape);
+    if(!opt.zLevel) {
+      return  this.zLevel = 0
+    }
+    this.zLevel = opt.zLevel
   }
   render(ctx) {
     // 绘制
@@ -19,8 +31,7 @@ class Element {
     // 保存状态 做到0侵入
     let style = this.style;
     ctx.save();
-    ctx.fillStyle = style.fill;
-    ctx.strokeStyle = style.stroke;
+    bindStyle(ctx, style);
     ctx.beginPath();
   }
   afterRender(ctx) {

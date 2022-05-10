@@ -42,5 +42,6 @@ let rect = new zrender.Rect({
     fill: "#0ff",
     stroke: "transparent",
   },
+  zLevel:2,
 });
 zr.add(rect, circle, circle1, circle2);

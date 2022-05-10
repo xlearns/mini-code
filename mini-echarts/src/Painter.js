@@ -1,3 +1,5 @@
+import { debounce } from "./utils.js";
+
 // 创建canvas
 function createCanvas(dom) {
   if (typeof dom == "string") {
@@ -13,10 +15,10 @@ export default class Painter {
     this.stage = stage;
     this.ctx = this.canvas.getContext("2d");
   }
-  render() {
+  render = debounce(()=>{
     let eleAll = this.stage.getAll();
     eleAll.forEach((ele) => {
       ele.refresh(this.ctx);
     });
-  }
+   },16)
 }
