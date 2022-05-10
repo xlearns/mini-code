@@ -1,7 +1,9 @@
 // 拿到所有导出模块
 import * as zrender from "mini-zrender";
 
-let zr = zrender.init("#app");
+let zr = zrender.init(".box",{
+  backgroundColor: "red"
+});
 let circle = new zrender.Circle({
   shape: {
     cx: 40,

@@ -6,12 +6,16 @@ function createCanvas(dom) {
     dom = document.querySelector(dom);
   }
   const canvas = document.createElement("canvas");
+  dom.innerHTML = "";
   dom.appendChild(canvas);
+  canvas.height = dom.clientHeight
+  canvas.width = dom.clientWidth
   return canvas;
 }
 export default class Painter {
-  constructor(dom, stage) {
+  constructor(dom, stage,opt) {
     this.canvas = createCanvas(dom);
+    setCanvasStyle(this.canvas, opt)
     this.stage = stage;
     this.ctx = this.canvas.getContext("2d");
   }
@@ -21,4 +25,23 @@ export default class Painter {
       ele.refresh(this.ctx);
     });
    },16)
+}
+
+
+function setCanvasStyle(canvas,opt = {}){
+  if (opt.height) {
+    canvas.height = opt.height
+    canvas.style.height = `${opt.height}px`
+  } else {
+    opt.height = canvas.clientHeight
+  }
+  if (opt.width) {
+    canvas.width = opt.width
+    canvas.style.width = `${opt.width}px`
+  } else {
+    opt.width = canvas.clientWidth
+  }
+  if (opt.backgroundColor) {
+    canvas.style.backgroundColor = opt.backgroundColor
+  }
 }
