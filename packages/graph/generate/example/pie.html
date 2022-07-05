@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>菜鸟教程(runoob.com)</title>
+  </head>
+  <body>
+    <canvas width="500" height="500"></canvas>
+    <script type="module" src="../packages/pie/pie.js"></script>
+    <script type="module">
+      import { pie } from "../packages/pie/pie.js";
+      var dataset = [
+        ["小米", 100.8, "red"],
+        ["三星", 58.4, "green"],
+        ["联想", 47.3, "black"],
+        ["苹果", 46.6, "blue"],
+        ["苹果", 60.6, "yellow"],
+      ];
+      function $(el) {
+        return document.querySelector(el);
+      }
+      let data = pie(dataset);
+      let canvas = $("canvas");
+      let ctx = canvas.getContext("2d");
+      let width = canvas.width;
+      let height = canvas.height;
+      let r = Math.min(width, height) / 4;
+      draw();
+      function draw() {
+        data.forEach((v) => {
+          ctx.fillStyle = v[2];
+          ctx.beginPath();
+          ctx.arc(width / 2, height / 2, r, v.startAngle, v.endAngle, false);
+          ctx.lineTo(width / 2, height / 2);
+          ctx.closePath();
+          ctx.fill();
+        });
+      }
+    </script>
+  </body>
+</html>

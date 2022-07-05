@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.jsdelivr.net/npm/zrender@5.3.1/dist/zrender.min.js"></script>
+  </head>
+  <body>
+    <div id="main" style="width: 500px; height: 500px"></div>
+    <script>
+      function pie(data) {
+        let sum = data.map((v) => v[1]).reduce((pre, cur) => pre + cur);
+        let angle = 0;
+        return data.map((v) => {
+          let [key, value] = v;
+          v.ratio = value / sum;
+          v.startAngle = angle;
+          angle += v.ratio * 2 * Math.PI;
+          v.endAngle = angle;
+          return v;
+        });
+      }
+      var dataset = [
+        ["小米", 100.8, "red"],
+        ["三星", 58.4, "green"],
+        ["联想", 47.3, "black"],
+        ["苹果", 46.6, "#fff"],
+        ["苹果", 60.6, "yellow"],
+      ]
+        .sort((a, b) => a[1] - b[1])
+        .map((v, i) => {
+          v.z = i;
+          return v;
+        });
+      console.log(dataset);
+      var zr = zrender.init(document.getElementById("main"));
+      let data = pie(dataset);
+      data.forEach((v) => {
+        zr.add(
+          new zrender.Sector({
+            draggable: true,
+            z: v.z,
+            style: {
+              fill: v[2],
+              lineWidth: 10,
+              stroke: "#fff",
+            },
+            shape: {
+              cx: 300,
+              cy: 300,
+              r: 80,
+              r0: 0,
+              startAngle: v.startAngle,
+              endAngle: v.endAngle,
+            },
+          })
+        );
+      });
+    </script>
+  </body>
+</html>

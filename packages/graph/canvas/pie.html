@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.4.4/dist/d3.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/d3/7.4.4/d3.min.js"></script> -->
+  </head>
+  <body>
+    <canvas width="500" height="500" />
+  </body>
+  <script>
+    var dataset = [
+      ["小米", 100.8, "red"],
+      ["三星", 58.4, "green"],
+      ["联想", 47.3, "black"],
+      ["苹果", 46.6, "blue"],
+      ["苹果", 46.6, "blue"],
+    ];
+    // 转换数据
+    let data = d3
+      .pie()
+      .value(function (d) {
+        return d[1];
+      })(dataset)
+      .map((v) => {
+        v.endAngle = v.endAngle - 0.02;
+        return v;
+      });
+
+    // 绘制
+    let canvas = document.querySelector("canvas");
+    let ctx = canvas.getContext("2d");
+    let width = canvas.width;
+    let height = canvas.height;
+    let radiusOut = Math.min(width, height) / 4;
+    let radiusIn = radiusOut * 0.6;
+    let backup = radiusOut;
+    let scale = 1.2;
+    // let radiusIn = 0;
+
+    draw();
+    function draw(config = {}) {
+      let { open, index: i } = config;
+
+      data.forEach((element, index) => {
+        if (open && i == index) {
+          radiusOut = radiusOut * scale;
+        } else {
+          radiusOut = backup;
+        }
+        ctx.fillStyle = element.data[2];
+        ctx.beginPath();
+        ctx.arc(
+          width / 2,
+          height / 2,
+          radiusOut,
+          element.startAngle,
+          element.endAngle,
+          false
+        );
+        ctx.lineTo(width / 2, height / 2);
+        ctx.closePath();
+        ctx.fill();
+      });
+      drawOut();
+    }
+    function drawBg() {
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.rect(0, 0, width, height);
+      ctx.fill();
+    }
+    function drawOut() {
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(width / 2, height / 2, radiusIn, 0, Math.PI * 2, false);
+      ctx.fill();
+    }
+
+    canvas.addEventListener("mousemove", (e) => {
+      let { pageX, pageY } = e;
+      let x = pageX - canvas.offsetLeft;
+      let y = pageY - canvas.offsetTop;
+      //圆心到鼠标 的位置
+      let len = Math.sqrt(
+        Math.pow(x - width / 2, 2) + Math.pow(y - height / 2, 2)
+      );
+      //判断是否在圆内
+      const b1 = len < radiusOut && len > radiusIn;
+      if (b1) {
+        //鼠标的夹角
+        let angle = Math.atan2(y - height / 2, x - width / 2);
+        // 转换为弧度
+        angle = angle < 0 ? angle + Math.PI * 2 : angle;
+        let index = 0;
+        data.forEach((element, i) => {
+          if (angle > element.startAngle && angle < element.endAngle) {
+            index = i;
+          }
+        });
+
+        drawBg();
+        draw({
+          open: true,
+          index,
+        });
+      } else {
+        drawBg();
+        draw();
+      }
+    });
+    let num = 0;
+    setInterval(() => {
+      let index = num++ % data.length;
+      drawBg();
+      draw({
+        open: true,
+        index,
+      });
+    }, 1000);
+  </script>
+</html>

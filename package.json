@@ -1,5 +1,25 @@
 {
+  "name": "mini-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest packages/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xlearns/mini-code.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xlearns/mini-code/issues"
+  },
+  "homepage": "https://github.com/xlearns/mini-code#readme",
   "devDependencies": {
-    "open": "^8.4.0"
+    "eslint": "^8.17.0",
+    "tsup": "^6.1.0",
+    "vitest": "^0.12.9"
   }
 }

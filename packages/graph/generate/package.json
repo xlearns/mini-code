@@ -1,0 +1,15 @@
+{
+  "name": "generate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pie.js",
+  "scripts": {
+    "test": "vitest packages/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitest": "^0.12.9"
+  }
+}
