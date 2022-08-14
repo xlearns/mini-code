@@ -1,0 +1,22 @@
+{
+    "sourceFile": "packages/mini-cac/README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1660474014168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1660636754681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,23 +1,53 @@\n # target\n - 这个库应该如何使用？\n   - 基于这个库的文档写一篇小教程\n+- 持续集成是如何实现的\n+  - CircleCI\n - 目录分析\n+  - .editorconfig\n+    - 必须配合：EditorConfig for VS Code 插件使用\n+    - [参考](https://juejin.cn/post/7058177971214876708)\n+  - .gitattributes\n - 注释\n+  - [参考](https://juejin.cn/post/7024319866119127053)\n - 分析用了那些包\n+  - mri\n+    - 获取解析命令行的数据\n - package.json\n - 分析tsconfig.json配置\n - 类型分析\n - 构建是如何做的？\n   - rollup.config.js\n+  - rollup各个插件的作用\n+    - 插件的具体实现\n - 分析一下单元测试环境是如何搭建的\n\\ No newline at end of file\n-- 持续集成是如何实现的\n - 写一个库的 README 需要哪几个部分？\n - 尝试通过单元测试调试库\n - 原理\n+  - EventEmitter\n+    - 订阅发布\n+    - on/emit\n   - options\n   - command\n   - action\n   - parse\n+    - mri\n   - 如何实现连续调用得api\n   - help \n-  - version \n+  - version \n+\n+# finish\n+- jest\n+  - 快照\n+  - 配置\n+  - 解析ts、tsx\n+  - js导入ts\n+    - ts-node\n+\n+\n+# 忽略\n+- script文件夹\n+  - deno相关\n+- mod.js\n+- mod.ts\n+- mod_test.ts\n"
+                }
+            ],
+            "date": 1660474014168,
+            "name": "Commit-0",
+            "content": "# target\n- 这个库应该如何使用？\n  - 基于这个库的文档写一篇小教程\n- 目录分析\n- 注释\n- 分析用了那些包\n- package.json\n- 分析tsconfig.json配置\n- 类型分析\n- 构建是如何做的？\n  - rollup.config.js\n- 分析一下单元测试环境是如何搭建的\n- 持续集成是如何实现的\n- 写一个库的 README 需要哪几个部分？\n- 尝试通过单元测试调试库\n- 原理\n  - options\n  - command\n  - action\n  - parse\n  - 如何实现连续调用得api\n  - help \n  - version "
+        }
+    ]
+}
