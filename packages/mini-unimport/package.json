@@ -1,0 +1,30 @@
+{
+  "name": "mini-unimport",
+  "type": "module",
+  "packageManager": "pnpm@6.26.1",
+  "version": "0.0.0",
+  "description": "",
+  "sideEffects": false,
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "scripts": {
+    "dev": "npm -C playground run dev "
+  },
+  "dependencies": {
+    "typescript": "^4.7.4",
+    "vitest": "^0.21.0",
+    "@vue/tsconfig": "^0.1.3"
+  },
+   "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "dist",
+    "*.d.ts",
+    "README.md"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
