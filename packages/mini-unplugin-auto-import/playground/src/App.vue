@@ -1,5 +1,7 @@
 <script setup lang="ts">
-let msg = $ref("hello world");
+let msg = ref("hello world");
+
+let test = ref("hello world123 ");
 </script>
 
 <template>
@@ -7,4 +9,6 @@ let msg = $ref("hello world");
 	<A />
 	<br />
 	{{ msg }}
+	<br />
+	{{ test }}
 </template>
