@@ -9,14 +9,14 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
-    "dev": "npm -C playground run dev "
+    "dev": "rollup -c"
   },
   "dependencies": {
+    "@vue/tsconfig": "^0.1.3",
     "typescript": "^4.7.4",
-    "vitest": "^0.21.0",
-    "@vue/tsconfig": "^0.1.3"
+    "vitest": "^0.21.0"
   },
-   "engines": {
+  "engines": {
     "node": ">=16"
   },
   "files": [
@@ -26,5 +26,12 @@
   ],
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "rollup": "^2.78.1",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-esbuild": "^4.9.3"
+  }
 }

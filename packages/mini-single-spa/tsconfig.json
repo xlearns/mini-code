@@ -1,6 +1,6 @@
 {
 	"extends": "@vue/tsconfig/tsconfig.web.json",
-	"include": ["packages", "typings"],
+	"include": ["src", "typings"],
 	"exclude": ["node_modules", "**/dist", "**/__tests__/**/*"],
 	"compilerOptions": {
 		"allowJs": true,
